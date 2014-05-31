@@ -19,6 +19,13 @@
 		95A300D2193A7842002C5414 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95A300BA193A7842002C5414 /* UIKit.framework */; };
 		95A300DA193A7842002C5414 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 95A300D8193A7842002C5414 /* InfoPlist.strings */; };
 		95A300DC193A7842002C5414 /* FlickrmalsTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 95A300DB193A7842002C5414 /* FlickrmalsTests.m */; };
+		95A300E6193A79A4002C5414 /* FlickrmalsStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 95A300E5193A79A4002C5414 /* FlickrmalsStoryboard.storyboard */; };
+		95A300E9193A7C10002C5414 /* DDPhotosDisplayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95A300E8193A7C10002C5414 /* DDPhotosDisplayViewController.m */; };
+		95A300EC193A7E0A002C5414 /* DDPhotoMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95A300EB193A7E0A002C5414 /* DDPhotoMapViewController.m */; };
+		95A300EF193A7E52002C5414 /* DDFlickrManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 95A300EE193A7E52002C5414 /* DDFlickrManager.m */; };
+		95A300F2193A7E64002C5414 /* DDPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 95A300F1193A7E64002C5414 /* DDPhoto.m */; };
+		95A300F5193A7FD0002C5414 /* DDPhotoCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 95A300F4193A7FD0002C5414 /* DDPhotoCollectionCell.m */; };
+		95A300F7193A85F2002C5414 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95A300F6193A85F2002C5414 /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +55,18 @@
 		95A300D7193A7842002C5414 /* FlickrmalsTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FlickrmalsTests-Info.plist"; sourceTree = "<group>"; };
 		95A300D9193A7842002C5414 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		95A300DB193A7842002C5414 /* FlickrmalsTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FlickrmalsTests.m; sourceTree = "<group>"; };
+		95A300E5193A79A4002C5414 /* FlickrmalsStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = FlickrmalsStoryboard.storyboard; sourceTree = "<group>"; };
+		95A300E7193A7C10002C5414 /* DDPhotosDisplayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDPhotosDisplayViewController.h; sourceTree = "<group>"; };
+		95A300E8193A7C10002C5414 /* DDPhotosDisplayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDPhotosDisplayViewController.m; sourceTree = "<group>"; };
+		95A300EA193A7E0A002C5414 /* DDPhotoMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDPhotoMapViewController.h; sourceTree = "<group>"; };
+		95A300EB193A7E0A002C5414 /* DDPhotoMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDPhotoMapViewController.m; sourceTree = "<group>"; };
+		95A300ED193A7E52002C5414 /* DDFlickrManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDFlickrManager.h; sourceTree = "<group>"; };
+		95A300EE193A7E52002C5414 /* DDFlickrManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDFlickrManager.m; sourceTree = "<group>"; };
+		95A300F0193A7E64002C5414 /* DDPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDPhoto.h; sourceTree = "<group>"; };
+		95A300F1193A7E64002C5414 /* DDPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDPhoto.m; sourceTree = "<group>"; };
+		95A300F3193A7FD0002C5414 /* DDPhotoCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDPhotoCollectionCell.h; sourceTree = "<group>"; };
+		95A300F4193A7FD0002C5414 /* DDPhotoCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDPhotoCollectionCell.m; sourceTree = "<group>"; };
+		95A300F6193A85F2002C5414 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95A300F7193A85F2002C5414 /* MapKit.framework in Frameworks */,
 				95A300B9193A7842002C5414 /* CoreGraphics.framework in Frameworks */,
 				95A300BB193A7842002C5414 /* UIKit.framework in Frameworks */,
 				95A300B7193A7842002C5414 /* Foundation.framework in Frameworks */,
@@ -96,6 +116,7 @@
 		95A300B5193A7842002C5414 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				95A300F6193A85F2002C5414 /* MapKit.framework */,
 				95A300B6193A7842002C5414 /* Foundation.framework */,
 				95A300B8193A7842002C5414 /* CoreGraphics.framework */,
 				95A300BA193A7842002C5414 /* UIKit.framework */,
@@ -109,6 +130,17 @@
 			children = (
 				95A300C5193A7842002C5414 /* DDAppDelegate.h */,
 				95A300C6193A7842002C5414 /* DDAppDelegate.m */,
+				95A300E5193A79A4002C5414 /* FlickrmalsStoryboard.storyboard */,
+				95A300F3193A7FD0002C5414 /* DDPhotoCollectionCell.h */,
+				95A300F4193A7FD0002C5414 /* DDPhotoCollectionCell.m */,
+				95A300E7193A7C10002C5414 /* DDPhotosDisplayViewController.h */,
+				95A300E8193A7C10002C5414 /* DDPhotosDisplayViewController.m */,
+				95A300EA193A7E0A002C5414 /* DDPhotoMapViewController.h */,
+				95A300EB193A7E0A002C5414 /* DDPhotoMapViewController.m */,
+				95A300ED193A7E52002C5414 /* DDFlickrManager.h */,
+				95A300EE193A7E52002C5414 /* DDFlickrManager.m */,
+				95A300F0193A7E64002C5414 /* DDPhoto.h */,
+				95A300F1193A7E64002C5414 /* DDPhoto.m */,
 				95A300C8193A7842002C5414 /* Images.xcassets */,
 				95A300BD193A7842002C5414 /* Supporting Files */,
 			);
@@ -222,6 +254,7 @@
 			files = (
 				95A300C1193A7842002C5414 /* InfoPlist.strings in Resources */,
 				95A300C9193A7842002C5414 /* Images.xcassets in Resources */,
+				95A300E6193A79A4002C5414 /* FlickrmalsStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -240,7 +273,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				95A300F2193A7E64002C5414 /* DDPhoto.m in Sources */,
+				95A300EC193A7E0A002C5414 /* DDPhotoMapViewController.m in Sources */,
+				95A300EF193A7E52002C5414 /* DDFlickrManager.m in Sources */,
 				95A300C7193A7842002C5414 /* DDAppDelegate.m in Sources */,
+				95A300E9193A7C10002C5414 /* DDPhotosDisplayViewController.m in Sources */,
+				95A300F5193A7FD0002C5414 /* DDPhotoCollectionCell.m in Sources */,
 				95A300C3193A7842002C5414 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

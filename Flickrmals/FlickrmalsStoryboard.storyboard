@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5056" systemVersion="13C64" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="FFK-dl-e9Y">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+    </dependencies>
+    <scenes>
+        <!--Photos Display View Controller-->
+        <scene sceneID="znF-yZ-rbI">
+            <objects>
+                <collectionViewController autoresizesArchivedViewToFullSize="NO" id="kQm-At-fWt" customClass="DDPhotosDisplayViewController" sceneMemberID="viewController">
+                    <collectionView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="mi0-Go-Nrw">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ufw-qF-h6O">
+                            <size key="itemSize" width="141" height="141"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="14" minY="7" maxX="14" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PhotoCell" id="Sfe-GW-eah">
+                                <rect key="frame" x="14" y="71" width="141" height="141"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="141" height="141"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <color key="backgroundColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="kQm-At-fWt" id="Ejx-MT-0Z2"/>
+                            <outlet property="delegate" destination="kQm-At-fWt" id="AY7-M5-ot2"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" id="4CL-hU-zTX"/>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="H2l-lw-T2G" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1249" y="-179"/>
+        </scene>
+        <!--Photo Map View Controller-->
+        <scene sceneID="QuC-zO-rAx">
+            <objects>
+                <viewController id="n7v-8X-XfS" customClass="DDPhotoMapViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="QRP-mg-tZm"/>
+                        <viewControllerLayoutGuide type="bottom" id="FFu-GO-nSJ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="coL-7M-F1F">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="WDz-od-ngq">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="O2r-rG-Tvg"/>
+                    <connections>
+                        <outlet property="photoMapView" destination="WDz-od-ngq" id="qI4-2S-3J1"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="J5g-AF-1mL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1249" y="774"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="32e-Rb-zv8">
+            <objects>
+                <tabBarController definesPresentationContext="YES" id="FFK-dl-e9Y" sceneMemberID="viewController">
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" id="2WC-ho-XE9">
+                        <rect key="frame" x="129" y="330" width="163" height="49"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="RYH-V7-sTz" kind="relationship" relationship="viewControllers" id="Xp8-1A-lQR"/>
+                        <segue destination="Xup-C6-jQO" kind="relationship" relationship="viewControllers" id="Bop-Y3-eLu"/>
+                        <segue destination="zfb-LT-VRD" kind="relationship" relationship="viewControllers" id="g73-3g-5Yw"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mdg-Z4-usv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-515" y="237"/>
+        </scene>
+        <!--Navigation Controller - Tigers-->
+        <scene sceneID="Sth-Bc-vcB">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="Xup-C6-jQO" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Tigers" id="ldE-vt-AJy"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="maA-9g-awS">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Rvm-Ok-9iT" kind="relationship" relationship="rootViewController" id="q1N-mz-2fV"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="W6L-Oc-qc0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="85" y="237"/>
+        </scene>
+        <!--Navigation Controller - Bears-->
+        <scene sceneID="irv-yD-S4q">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="zfb-LT-VRD" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Bears" id="kcc-Kg-0uD"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="PPc-uU-WK7">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="Qnh-zF-At2" kind="relationship" relationship="rootViewController" id="pfs-Nu-kyy"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZJT-23-TPp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="85" y="929"/>
+        </scene>
+        <!--Navigation Controller - Lions-->
+        <scene sceneID="hih-2P-dgz">
+            <objects>
+                <navigationController definesPresentationContext="YES" id="RYH-V7-sTz" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Lions" id="ITO-S1-Oaj"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="FLv-mk-qtZ">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="2Iy-g4-bJI" kind="relationship" relationship="rootViewController" id="zq7-L4-xEM"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bIW-Va-zi8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="85" y="-479"/>
+        </scene>
+        <!--Photos Display View Controller - Lion Photos-->
+        <scene sceneID="FBf-Ag-6tW">
+            <objects>
+                <collectionViewController autoresizesArchivedViewToFullSize="NO" id="2Iy-g4-bJI" customClass="DDPhotosDisplayViewController" sceneMemberID="viewController">
+                    <collectionView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="1ro-zB-662">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Fi7-Ke-UYf">
+                            <size key="itemSize" width="141" height="141"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="14" minY="7" maxX="14" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PhotoCell" id="WaT-nr-cje">
+                                <rect key="frame" x="14" y="71" width="141" height="141"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="141" height="141"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <color key="backgroundColor" red="0.0" green="0.25098040699958801" blue="0.50196081399917603" alpha="1" colorSpace="calibratedRGB"/>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="2Iy-g4-bJI" id="RPX-vG-7NN"/>
+                            <outlet property="delegate" destination="2Iy-g4-bJI" id="hjS-27-obp"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" title="Lion Photos" id="jGn-rO-ZTD"/>
+                    <connections>
+                        <segue destination="kQm-At-fWt" kind="push" identifier="PhotogWorksSegue1" id="USK-9b-trT"/>
+                        <segue destination="n7v-8X-XfS" kind="modal" identifier="PhotoMapSegue1" id="hiP-yh-a7D"/>
+                    </connections>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fHe-he-Tkg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="517" y="-479"/>
+        </scene>
+        <!--Photos Display View Controller - Tiger Photos-->
+        <scene sceneID="fkA-xq-yrp">
+            <objects>
+                <collectionViewController autoresizesArchivedViewToFullSize="NO" id="Rvm-Ok-9iT" customClass="DDPhotosDisplayViewController" sceneMemberID="viewController">
+                    <collectionView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="87m-2X-xht">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="kZT-kG-gMn">
+                            <size key="itemSize" width="141" height="141"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="14" minY="7" maxX="14" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PhotoCell" id="Kca-wf-6oc">
+                                <rect key="frame" x="14" y="71" width="141" height="141"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="141" height="141"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <color key="backgroundColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="Rvm-Ok-9iT" id="QP1-Xt-0o8"/>
+                            <outlet property="delegate" destination="Rvm-Ok-9iT" id="w88-Rz-AwF"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" title="Tiger Photos" id="Hef-cU-JNi"/>
+                    <connections>
+                        <segue destination="kQm-At-fWt" kind="push" identifier="PhotogWorksSegue2" id="Pzi-lc-e9t"/>
+                        <segue destination="n7v-8X-XfS" kind="modal" identifier="PhotoMapSegue2" id="vmx-sg-dD7"/>
+                    </connections>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uhd-UF-VRL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="517" y="237"/>
+        </scene>
+        <!--Photos Display View Controller - Bear Photos-->
+        <scene sceneID="JHW-EP-Pza">
+            <objects>
+                <collectionViewController autoresizesArchivedViewToFullSize="NO" id="Qnh-zF-At2" customClass="DDPhotosDisplayViewController" sceneMemberID="viewController">
+                    <collectionView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="t5Y-86-4Mm">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="dhm-8b-X1E">
+                            <size key="itemSize" width="141" height="141"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="14" minY="7" maxX="14" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <cells>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PhotoCell" id="CQU-Lm-PDW">
+                                <rect key="frame" x="14" y="71" width="141" height="141"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="0.0" y="0.0" width="141" height="141"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <color key="backgroundColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                            </collectionViewCell>
+                        </cells>
+                        <connections>
+                            <outlet property="dataSource" destination="Qnh-zF-At2" id="ddo-kv-9gP"/>
+                            <outlet property="delegate" destination="Qnh-zF-At2" id="HHy-YU-XTT"/>
+                        </connections>
+                    </collectionView>
+                    <navigationItem key="navigationItem" title="Bear Photos" id="NTW-YI-vuy"/>
+                    <connections>
+                        <segue destination="kQm-At-fWt" kind="push" identifier="PhotogWorksSegue3" id="u7N-id-ygD"/>
+                        <segue destination="n7v-8X-XfS" kind="modal" identifier="PhotoMapSegue3" id="BaS-ho-Xtf"/>
+                    </connections>
+                </collectionViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="I5A-8d-M4v" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="517" y="929"/>
+        </scene>
+    </scenes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="hiP-yh-a7D"/>
+        <segue reference="USK-9b-trT"/>
+    </inferredMetricsTieBreakers>
+</document>
