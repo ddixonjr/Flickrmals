@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
+#import "DDPhoto.h"
+
 
 @interface DDPhotoMapViewController : UIViewController
+
+@property (strong, nonatomic) DDPhoto *photo;
 
 @end

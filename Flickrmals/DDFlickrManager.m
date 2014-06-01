@@ -41,6 +41,7 @@
         {
             return nil;
         }
+        requestedPhotoSet = [self.photoSetsDictionary objectForKey:searchKeyword];
     }
 
     NSLog(@"photoSetsDictionary contains: %@", self.photoSetsDictionary);
@@ -55,8 +56,13 @@
     NSArray *requestedPhotoSet = [self.photoSetsDictionary objectForKey:flickrPhotogID];
     if (refreshRequested || requestedPhotoSet == nil)
     {
-        [self pullPhotoSetOfType:DDFlickrPhotoSetRequestPhotogType withSearchString:flickrPhotogID];
+        if (![self pullPhotoSetOfType:DDFlickrPhotoSetRequestPhotogType withSearchString:flickrPhotogID])
+        {
+            return nil;
+        }
     }
+
+    requestedPhotoSet = [self.photoSetsDictionary objectForKey:flickrPhotogID];
 
     NSLog(@"photoSetsDictionary contains: %@", self.photoSetsDictionary);
     return requestedPhotoSet;
@@ -93,10 +99,14 @@
                 DDPhoto *newDDPhoto = [[DDPhoto alloc] initWithImageData:newPhotoData];
                 newDDPhoto.photoTitle = [photoDictionary objectForKey:@"title"];
                 newDDPhoto.photoID = [photoDictionary objectForKey:@"id"];
-                newDDPhoto.photoLatitude = [photoDictionary objectForKey:@"latitude"];
-                newDDPhoto.photoLongitude = [photoDictionary objectForKey:@"longitude"];
                 newDDPhoto.photogName = [photoDictionary objectForKey:@"ownername"];
                 newDDPhoto.photogID = [photoDictionary objectForKey:@"owner"];
+
+                NSNumber *coordinatePoint = [photoDictionary objectForKey:@"latitude"];
+                newDDPhoto.photoLongitude = [coordinatePoint doubleValue];
+                coordinatePoint = [photoDictionary objectForKey:@"longitude"];
+                newDDPhoto.photoLongitude = [coordinatePoint doubleValue];
+
                 curPhotogID = newDDPhoto.photogID;
                 [newPhotoSet addObject:newDDPhoto];
             }

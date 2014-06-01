@@ -14,7 +14,9 @@
 {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        // Initialization code
+        self.imageView = [[UIImageView alloc] init];
+        self.imageView.frame = self.contentView.bounds;
+        [self.contentView addSubview:self.imageView];
     }
     return self;
 }

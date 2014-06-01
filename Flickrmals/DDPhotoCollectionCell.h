@@ -10,4 +10,6 @@
 
 @interface DDPhotoCollectionCell : UICollectionViewCell
 
+@property (strong, nonatomic) UIImageView *imageView;
+
 @end

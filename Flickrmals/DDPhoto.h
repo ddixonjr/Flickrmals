@@ -16,8 +16,8 @@
 @property (strong, nonatomic) NSString *photoID;
 @property (strong, nonatomic) NSString *photoDescription;
 @property (strong, nonatomic) NSString *photoTitle;
-@property (strong, nonatomic) NSString *photoLatitude;
-@property (strong, nonatomic) NSString *photoLongitude;
+@property (assign, nonatomic) double photoLatitude;
+@property (assign, nonatomic) double photoLongitude;
 
 - (id)initWithImageData:(NSData *)imageData;
 

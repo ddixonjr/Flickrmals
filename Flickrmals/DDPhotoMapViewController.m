@@ -21,8 +21,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    MKPointAnnotation *pointAnnotation = [[MKPointAnnotation alloc] init];
+    pointAnnotation.coordinate = CLLocationCoordinate2DMake(self.photo.photoLatitude, self.photo.photoLongitude);
+    MKCoordinateSpan span = MKCoordinateSpanMake(7.0,7.0);
+    MKCoordinateRegion region = MKCoordinateRegionMake(pointAnnotation.coordinate,span);
+    [self.photoMapView addAnnotation:pointAnnotation];
+    [self.photoMapView setRegion:region animated:YES];
 }
 
-
+- (IBAction)onDismissButtonTapped:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
 @end
