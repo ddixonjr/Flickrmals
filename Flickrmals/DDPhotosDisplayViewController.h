@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DDFlickrManager.h"
+
 
 @interface DDPhotosDisplayViewController : UICollectionViewController
+
+@property (strong, nonatomic) DDFlickrManager *flickrManager;
 
 @end

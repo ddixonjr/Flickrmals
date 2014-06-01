@@ -8,7 +8,10 @@
 
 #import "DDPhotosDisplayViewController.h"
 
+
 @interface DDPhotosDisplayViewController ()
+
+
 
 @end
 
@@ -17,7 +20,16 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
+    if (self.flickrManager == nil)
+    {
+        self.flickrManager = [[DDFlickrManager alloc] init];
+    }
+    [self.flickrManager getPhotoSetWithSearchKeyword:@"Lion" withRefresh:YES];
+    [self.flickrManager getPhotoSetWithPhotogID:@"92269745@N00" withRefresh:YES];
+    [self.flickrManager getPhotoSetWithSearchKeyword:@"Tiger" withRefresh:YES];
+    [self.flickrManager getPhotoSetWithSearchKeyword:@"Bear" withRefresh:YES];
+
 }
 
 

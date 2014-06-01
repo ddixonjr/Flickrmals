@@ -32,23 +32,34 @@
 
 - (NSArray *)getPhotoSetWithSearchKeyword:(NSString *)searchKeyword withRefresh:(BOOL)refreshRequested
 {
+    NSLog(@"DDFlickrManager: in getPhotoSetWithSearchKeyword:withRefresh:");
+
     NSArray *requestedPhotoSet = [self.photoSetsDictionary objectForKey:searchKeyword];
     if (refreshRequested || requestedPhotoSet == nil)
     {
-        [self pullPhotoSetOfType:DDFlickrPhotoSetRequestPhotogType withSearchString:searchKeyword];
-    };
-    return [self.photoSetsDictionary objectForKey:searchKeyword];
+        if (![self pullPhotoSetOfType:DDFlickrPhotoSetRequestSearchKeywordType withSearchString:searchKeyword])
+        {
+            return nil;
+        }
+    }
+
+    NSLog(@"photoSetsDictionary contains: %@", self.photoSetsDictionary);
+    return requestedPhotoSet;
 }
 
 
 - (NSArray *)getPhotoSetWithPhotogID:(NSString *)flickrPhotogID withRefresh:(BOOL)refreshRequested
 {
-    NSArray *requestedPhotoSet = [self.photoSetsDictionary objectForKey:searchKeyword];
+    NSLog(@"DDFlickrManager: in getPhotoSetWithPhotogID:withRefresh:");
+
+    NSArray *requestedPhotoSet = [self.photoSetsDictionary objectForKey:flickrPhotogID];
     if (refreshRequested || requestedPhotoSet == nil)
     {
-        [self pullPhotoSetOfType:DDFlickrPhotoSetRequestPhotogType withSearchString:searchKeyword];
-    };
-    return [self.photoSetsDictionary objectForKey:searchKeyword];
+        [self pullPhotoSetOfType:DDFlickrPhotoSetRequestPhotogType withSearchString:flickrPhotogID];
+    }
+
+    NSLog(@"photoSetsDictionary contains: %@", self.photoSetsDictionary);
+    return requestedPhotoSet;
 }
 
 
@@ -61,18 +72,22 @@
     NSString *photoSetURLString = [NSString stringWithFormat:@"%@%@%@",kFlickrAPIPhotoSearchBaseRESTURL,searchParamPrefix,searchString];
 
     NSURL *photoSetURL = [NSURL URLWithString:photoSetURLString];
-    NSData *photoSetData = [NSData dataWithContentsOfURL:photoSetURL];
+    NSError *dataPullError = [[NSError alloc] init];
+    NSData *photoSetData = [NSData dataWithContentsOfURL:photoSetURL options:NSDataReadingUncached error:&dataPullError];
     NSError *photoSetPullError = [[NSError alloc] init];
-    NSDictionary *rawPhotoSetDictionary = [NSJSONSerialization JSONObjectWithData:photoSetData options:NSJSONReadingAllowFragments error:&photoSetPullError];
+    NSDictionary *rawPhotoSetContainer = [NSJSONSerialization JSONObjectWithData:photoSetData options:NSJSONReadingAllowFragments error:&photoSetPullError];
+    NSDictionary *rawPhotoSetDictionary = [rawPhotoSetContainer objectForKey:@"photos"];
     NSArray *rawPhotoSetArray = [rawPhotoSetDictionary objectForKey:@"photo"];
 
-    if (!photoSetPullError)
+    if (photoSetPullError.userInfo != nil)
     {
         NSMutableArray *newPhotoSet = [[NSMutableArray alloc] init];
         NSString *curPhotogID = nil;
         for (NSDictionary *photoDictionary in rawPhotoSetArray)
         {
-            NSData *newPhotoData = [NSData dataWithContentsOfURL:[photoDictionary objectForKey:@"url_q"]];
+            NSString *newPhotoURLString = [photoDictionary objectForKey:@"url_q"];
+            NSData *newPhotoData = [NSData dataWithContentsOfURL:[NSURL URLWithString:newPhotoURLString]];
+
             if (newPhotoData != nil)
             {
                 DDPhoto *newDDPhoto = [[DDPhoto alloc] initWithImageData:newPhotoData];
@@ -103,6 +118,16 @@
         return NO;
     }
     return NO;
+}
+
+
+- (NSMutableDictionary *)photoSetsDictionary
+{
+    if (_photoSetsDictionary == nil)
+    {
+        _photoSetsDictionary = [[NSMutableDictionary alloc] init];
+    }
+    return _photoSetsDictionary;
 }
 
 @end
