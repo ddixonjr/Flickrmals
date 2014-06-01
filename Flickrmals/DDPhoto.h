@@ -10,4 +10,15 @@
 
 @interface DDPhoto : NSObject
 
+@property (strong, readonly, nonatomic) UIImage *image;
+@property (strong, nonatomic) NSString *photogID;
+@property (strong, nonatomic) NSString *photogName;
+@property (strong, nonatomic) NSString *photoID;
+@property (strong, nonatomic) NSString *photoDescription;
+@property (strong, nonatomic) NSString *photoTitle;
+@property (strong, nonatomic) NSString *photoLatitude;
+@property (strong, nonatomic) NSString *photoLongitude;
+
+- (id)initWithImageData:(NSData *)imageData;
+
 @end

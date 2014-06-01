@@ -8,6 +8,29 @@
 
 #import "DDPhoto.h"
 
+@interface DDPhoto ()
+
+@property (strong, nonatomic) UIImage *image;
+
+@end
+
+
+
 @implementation DDPhoto
+
+- (id)init
+{
+    return [self initWithImageData:nil];  // Replace nil with a default image later
+}
+
+- (id)initWithImageData:(NSData *)imageData
+{
+    self = [super init];
+    if (self)
+    {
+        self.image = [UIImage imageWithData:imageData];
+    }
+    return self;
+}
 
 @end
