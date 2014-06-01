@@ -30,33 +30,31 @@
 
 #pragma mark - Public/API Methods
 
-- (NSArray *)getPhotoSetWithSearchKeyword:(NSString *)searchKeyword
+- (NSArray *)getPhotoSetWithSearchKeyword:(NSString *)searchKeyword withRefresh:(BOOL)refreshRequested
 {
-
+    NSArray *requestedPhotoSet = [self.photoSetsDictionary objectForKey:searchKeyword];
+    if (refreshRequested || requestedPhotoSet == nil)
+    {
+        [self pullPhotoSetOfType:DDFlickrPhotoSetRequestPhotogType withSearchString:searchKeyword];
+    };
+    return [self.photoSetsDictionary objectForKey:searchKeyword];
 }
 
 
-- (NSArray *)getPhotoSetWithPhotogID:(NSString *)flickrPhotogID
+- (NSArray *)getPhotoSetWithPhotogID:(NSString *)flickrPhotogID withRefresh:(BOOL)refreshRequested
 {
-
-}
-
-
-- (NSArray *)refreshPhotoSetWithSearchKeyword:(NSString *)searchKeyword
-{
-
-}
-
-
-- (NSArray *)refreshPhotoSetWithPhotogID:(NSString *)flickrPhotogID
-{
-
+    NSArray *requestedPhotoSet = [self.photoSetsDictionary objectForKey:searchKeyword];
+    if (refreshRequested || requestedPhotoSet == nil)
+    {
+        [self pullPhotoSetOfType:DDFlickrPhotoSetRequestPhotogType withSearchString:searchKeyword];
+    };
+    return [self.photoSetsDictionary objectForKey:searchKeyword];
 }
 
 
 #pragma mark - Private/Helper Methods
 
-- (void)pullPhotoSetOfType:(DDFlickrPhotoSetRequestType)photoSetRequestType withSearchString:(NSString *)searchString
+- (BOOL)pullPhotoSetOfType:(DDFlickrPhotoSetRequestType)photoSetRequestType withSearchString:(NSString *)searchString
 {
     NSString *searchParamPrefix = (photoSetRequestType == DDFlickrPhotoSetRequestSearchKeywordType) ? kFlickrAPISearchKeywordRESTParamPrefix : kFlickrAPIPhotogWorksRESTParamPrefix;
 
@@ -67,28 +65,44 @@
     NSError *photoSetPullError = [[NSError alloc] init];
     NSDictionary *rawPhotoSetDictionary = [NSJSONSerialization JSONObjectWithData:photoSetData options:NSJSONReadingAllowFragments error:&photoSetPullError];
     NSArray *rawPhotoSetArray = [rawPhotoSetDictionary objectForKey:@"photo"];
+
     if (!photoSetPullError)
     {
+        NSMutableArray *newPhotoSet = [[NSMutableArray alloc] init];
+        NSString *curPhotogID = nil;
         for (NSDictionary *photoDictionary in rawPhotoSetArray)
         {
             NSData *newPhotoData = [NSData dataWithContentsOfURL:[photoDictionary objectForKey:@"url_q"]];
-            // Add error checking here??
-            DDPhoto *newDDPhoto = [[DDPhoto alloc] initWithImageData:newPhotoData];
-            newDDPhoto.photoTitle = [photoDictionary objectForKey:@""];
-            newDDPhoto.photoTitle = [photoDictionary objectForKey:@""];
-            newDDPhoto.photoTitle = [photoDictionary objectForKey:@""];
-            newDDPhoto.photoTitle = [photoDictionary objectForKey:@""];
-            newDDPhoto.photoTitle = [photoDictionary objectForKey:@""];
-            newDDPhoto.photoTitle = [photoDictionary objectForKey:@""];
-            newDDPhoto.photoTitle = [photoDictionary objectForKey:@""];
-            newDDPhoto.photoTitle = [photoDictionary objectForKey:@""];
+            if (newPhotoData != nil)
+            {
+                DDPhoto *newDDPhoto = [[DDPhoto alloc] initWithImageData:newPhotoData];
+                newDDPhoto.photoTitle = [photoDictionary objectForKey:@"title"];
+                newDDPhoto.photoID = [photoDictionary objectForKey:@"id"];
+                newDDPhoto.photoLatitude = [photoDictionary objectForKey:@"latitude"];
+                newDDPhoto.photoLongitude = [photoDictionary objectForKey:@"longitude"];
+                newDDPhoto.photogName = [photoDictionary objectForKey:@"ownername"];
+                newDDPhoto.photogID = [photoDictionary objectForKey:@"owner"];
+                curPhotogID = newDDPhoto.photogID;
+                [newPhotoSet addObject:newDDPhoto];
+            }
         }
+
+        if (photoSetRequestType == DDFlickrPhotoSetRequestSearchKeywordType)
+        {
+            [self.photoSetsDictionary setValue:newPhotoSet forKey:searchString];
+        }
+        else if (photoSetRequestType == DDFlickrPhotoSetRequestPhotogType)
+        {
+            [self.photoSetsDictionary setValue:newPhotoSet forKey:curPhotogID];
+        }
+        return YES;
     }
     else
     {
         NSLog(@"DDFlickrManager: error pulling photoset dictionary");
+        return NO;
     }
-
+    return NO;
 }
 
 @end

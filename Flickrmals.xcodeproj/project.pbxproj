@@ -476,6 +476,7 @@
 				95A300E1193A7843002C5414 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		95A300E2193A7843002C5414 /* Build configuration list for PBXNativeTarget "FlickrmalsTests" */ = {
 			isa = XCConfigurationList;
@@ -484,6 +485,7 @@
 				95A300E4193A7843002C5414 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

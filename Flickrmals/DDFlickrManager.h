@@ -26,9 +26,7 @@ typedef enum
 
 @property (strong, nonatomic) id<DDFlickrManagerDelegate> delegate;
 
--(NSArray *)getPhotoSetWithSearchKeyword:(NSString *)searchKeyword;
--(NSArray *)getPhotoSetWithPhotogID:(NSString *)flickrPhotogID;
--(NSArray *)refreshPhotoSetWithSearchKeyword:(NSString *)searchKeyword;
--(NSArray *)refreshPhotoSetWithPhotogID:(NSString *)flickrPhotogID;
+-(NSArray *)getPhotoSetWithSearchKeyword:(NSString *)searchKeyword withRefresh:(BOOL)refreshRequested;
+-(NSArray *)getPhotoSetWithPhotogID:(NSString *)flickrPhotogID withRefresh:(BOOL)refreshRequested;
 
 @end
