@@ -27,7 +27,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
-                                <color key="backgroundColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </collectionViewCell>
                         </cells>
                         <connections>
@@ -149,7 +149,7 @@
             </objects>
             <point key="canvasLocation" x="85" y="-479"/>
         </scene>
-        <!--Photos Display View Controller - Lion Photos-->
+        <!--Photos Display View Controller - Flickrmal Lions-->
         <scene sceneID="FBf-Ag-6tW">
             <objects>
                 <collectionViewController autoresizesArchivedViewToFullSize="NO" id="2Iy-g4-bJI" customClass="DDPhotosDisplayViewController" sceneMemberID="viewController">
@@ -180,7 +180,7 @@
                             <outlet property="delegate" destination="2Iy-g4-bJI" id="hjS-27-obp"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" title="Lion Photos" id="jGn-rO-ZTD"/>
+                    <navigationItem key="navigationItem" title="Flickrmal Lions" id="jGn-rO-ZTD"/>
                     <connections>
                         <segue destination="kQm-At-fWt" kind="push" identifier="PhotogWorksSegue1" id="USK-9b-trT"/>
                         <segue destination="n7v-8X-XfS" kind="modal" identifier="PhotoMapSegue1" id="hiP-yh-a7D"/>
@@ -190,7 +190,7 @@
             </objects>
             <point key="canvasLocation" x="517" y="-479"/>
         </scene>
-        <!--Photos Display View Controller - Tiger Photos-->
+        <!--Photos Display View Controller - Flickrmal Tigers-->
         <scene sceneID="fkA-xq-yrp">
             <objects>
                 <collectionViewController autoresizesArchivedViewToFullSize="NO" id="Rvm-Ok-9iT" customClass="DDPhotosDisplayViewController" sceneMemberID="viewController">
@@ -213,7 +213,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
-                                <color key="backgroundColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </collectionViewCell>
                         </cells>
                         <connections>
@@ -221,7 +221,7 @@
                             <outlet property="delegate" destination="Rvm-Ok-9iT" id="w88-Rz-AwF"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" title="Tiger Photos" id="Hef-cU-JNi"/>
+                    <navigationItem key="navigationItem" title="Flickrmal Tigers" id="Hef-cU-JNi"/>
                     <connections>
                         <segue destination="kQm-At-fWt" kind="push" identifier="PhotogWorksSegue2" id="Pzi-lc-e9t"/>
                         <segue destination="n7v-8X-XfS" kind="modal" identifier="PhotoMapSegue2" id="vmx-sg-dD7"/>
@@ -231,7 +231,7 @@
             </objects>
             <point key="canvasLocation" x="517" y="237"/>
         </scene>
-        <!--Photos Display View Controller - Bear Photos-->
+        <!--Photos Display View Controller - Flickrmal Bears-->
         <scene sceneID="JHW-EP-Pza">
             <objects>
                 <collectionViewController autoresizesArchivedViewToFullSize="NO" id="Qnh-zF-At2" customClass="DDPhotosDisplayViewController" sceneMemberID="viewController">
@@ -254,7 +254,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
-                                <color key="backgroundColor" red="0.0" green="0.25098040700000002" blue="0.50196081400000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                             </collectionViewCell>
                         </cells>
                         <connections>
@@ -262,7 +262,7 @@
                             <outlet property="delegate" destination="Qnh-zF-At2" id="HHy-YU-XTT"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" title="Bear Photos" id="NTW-YI-vuy"/>
+                    <navigationItem key="navigationItem" title="Flickrmal Bears" id="NTW-YI-vuy"/>
                     <connections>
                         <segue destination="kQm-At-fWt" kind="push" identifier="PhotogWorksSegue3" id="u7N-id-ygD"/>
                         <segue destination="n7v-8X-XfS" kind="modal" identifier="PhotoMapSegue3" id="BaS-ho-Xtf"/>

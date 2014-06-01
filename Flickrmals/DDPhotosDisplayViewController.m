@@ -24,11 +24,13 @@
 #define kColorPaleOrangeGreen   185.0/255.0
 #define kColorPaleOrangeBlue    112.0/255.0
 
-@interface DDPhotosDisplayViewController () <DDPhotoCollectionViewCellDelegate>
+@interface DDPhotosDisplayViewController () <DDPhotoCollectionViewCellDelegate,UICollectionViewDelegateFlowLayout>
 
 @property (strong, nonatomic) NSArray *photoSetArray;
 
 @end
+
+
 
 @implementation DDPhotosDisplayViewController
 
@@ -45,6 +47,7 @@
                                                           green:kColorDarkBlueGreen
                                                            blue:kColorDarkBlueBlue
                                                           alpha:0.7];
+
 
     if (self.flickrManager == nil)
     {
@@ -126,6 +129,41 @@
 //
 //    [selectedCell flip];
 //}
+
+
+#pragma mark - UICollectionViewDelegateFlowLayout Delegate Methods
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+{
+    NSLog(@"in insetForSectionAtIndex");
+    UIEdgeInsets insets;
+    if ([UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortrait)
+    {
+        insets = UIEdgeInsetsMake(7.0, 5.0, 0.0, 5.0);
+    }
+    else
+    {
+        insets = UIEdgeInsetsMake(30.0, 5.0, 30.0, 5.0);
+    }
+    return insets;
+}
+
+-(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    NSLog(@"in didRotateFromInterfaceOrientation");
+    if (fromInterfaceOrientation == UIInterfaceOrientationPortrait)
+    {
+        UICollectionViewFlowLayout *curFlowLayout = (UICollectionViewFlowLayout *) self.collectionViewLayout;
+        curFlowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    }
+    else
+    {
+        UICollectionViewFlowLayout *curFlowLayout = (UICollectionViewFlowLayout *) self.collectionViewLayout;
+        curFlowLayout.scrollDirection = UICollectionViewScrollDirectionVertical;
+    }
+
+    [self.collectionView reloadData];
+}
 
 
 #pragma mark - Helper Methods
