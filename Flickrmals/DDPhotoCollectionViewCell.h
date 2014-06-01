@@ -8,12 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+#define kDDPhotoCollectionViewCellRearButton0 10
+#define kDDPhotoCollectionViewCellInsetButton0 0
+
 
 @class DDPhotoCollectionViewCell;
 
 @protocol DDPhotoCollectionViewCellDelegate
 
 - (void)ddCollectionViewCell:(DDPhotoCollectionViewCell *)photoCell didSelectInsetAccessoryButtonWithTag:(NSInteger)buttonTag;
+
+@optional
 - (void)ddCollectionViewCell:(DDPhotoCollectionViewCell *)photoCell didRecieveLongTapWithFlippedOnBackStatus:(BOOL)isFlippedOnBack;
 
 @end

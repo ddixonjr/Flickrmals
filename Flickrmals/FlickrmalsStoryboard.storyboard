@@ -89,7 +89,10 @@
                     <tabBar key="tabBar" contentMode="scaleToFill" id="2WC-ho-XE9">
                         <rect key="frame" x="129" y="330" width="163" height="49"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="barTintColor" red="0.2941176593" green="0.36862745879999997" blue="0.47843140360000003" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="selectedImageTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
                         <segue destination="RYH-V7-sTz" kind="relationship" relationship="viewControllers" id="Xp8-1A-lQR"/>
@@ -279,7 +282,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="hiP-yh-a7D"/>
-        <segue reference="USK-9b-trT"/>
+        <segue reference="Pzi-lc-e9t"/>
+        <segue reference="vmx-sg-dD7"/>
     </inferredMetricsTieBreakers>
 </document>

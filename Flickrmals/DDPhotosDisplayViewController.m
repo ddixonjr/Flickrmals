@@ -9,6 +9,7 @@
 #import "DDPhotosDisplayViewController.h"
 #import "DDPhotoMapViewController.h"
 #import "DDPhotoCollectionViewCell.h"
+#import "DDAppDelegate.h"
 #import "DDPhoto.h"
 
 #define kLionTab 0
@@ -17,12 +18,13 @@
 #define kColorDarkBlueRed       75.0/255.0
 #define kColorDarkBlueGreen     94.0/255.0
 #define kColorDarkBlueBlue      122.0/255.0
-#define kColorBaseBlueRed       131.0/255.0
-#define kColorBaseBlueGreen     144.0/255.0
-#define kColorBaseBlueBlue      164.0/255.0
+#define kColorBaseBlueRed       176.0/255.0
+#define kColorBaseBlueGreen     198.0/255.0
+#define kColorBaseBlueBlue      233.0/255.0
 #define kColorPaleOrangeRed     252.0/255.0
 #define kColorPaleOrangeGreen   185.0/255.0
 #define kColorPaleOrangeBlue    112.0/255.0
+#define kDefaultNavBarColorAlpha 0.7
 
 @interface DDPhotosDisplayViewController () <DDPhotoCollectionViewCellDelegate,UICollectionViewDelegateFlowLayout>
 
@@ -38,55 +40,70 @@
 {
     [super viewDidLoad];
 
-    self.collectionView.backgroundColor = [UIColor colorWithRed:kColorBaseBlueRed
-                                                                           green:kColorBaseBlueGreen
-                                                                            blue:kColorBaseBlueBlue
-                                                                           alpha:0.7];
-    self.navigationController.navigationBar.barStyle = UIBarStyleBlackOpaque;
-    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:kColorDarkBlueRed
-                                                          green:kColorDarkBlueGreen
-                                                           blue:kColorDarkBlueBlue
-                                                          alpha:0.7];
-
-
     if (self.flickrManager == nil)
     {
         self.flickrManager = [[DDFlickrManager alloc] init];
     }
 
+    [self setUpMainViewColors];
     [self getPhotoSetUsingTabWithRefresh:YES];
 }
 
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    if (self.photogID != nil)
+    {
+        self.tabBarController.tabBar.hidden = YES;
+        self.title = (self.photogName != nil && [self.photogName length] > 0) ? self.photogName : @"Photog Work Sample";
+    }
+    else
+    {
+        self.tabBarController.tabBar.hidden = NO;
+    }
+
     [self getPhotoSetUsingTabWithRefresh:NO];
 }
 
 
--(void)ddCollectionViewCell:(DDPhotoCollectionViewCell *)photoCell didRecieveLongTapWithFlippedOnBackStatus:(BOOL)isFlippedOnBack
-{
-
-
-
-}
+#pragma mark - DDPhotoCollectionViewCellDelegate Methods
 
 -(void)ddCollectionViewCell:(DDPhotoCollectionViewCell *)photoCell didSelectInsetAccessoryButtonWithTag:(NSInteger)buttonTag
 {
     DDPhoto *selectedPhoto = [self.photoSetArray objectAtIndex:photoCell.tag];
-    switch (self.tabBarController.selectedIndex)
+    if (buttonTag == kDDPhotoCollectionViewCellInsetButton0)
     {
-        case kLionTab:
-            [self performSegueWithIdentifier:@"PhotoMapSegue1" sender:selectedPhoto];
-            break;
-        case kTigerTab:
-            [self performSegueWithIdentifier:@"PhotoMapSegue2" sender:selectedPhoto];
-            break;
-        case kBearTab:
-            [self performSegueWithIdentifier:@"PhotoMapSegue3" sender:selectedPhoto];
-            break;
-        default:
-            break;
+        switch (self.tabBarController.selectedIndex)
+        {
+            case kLionTab:
+                [self performSegueWithIdentifier:@"PhotoMapSegue1" sender:selectedPhoto];
+                break;
+            case kTigerTab:
+                [self performSegueWithIdentifier:@"PhotoMapSegue2" sender:selectedPhoto];
+                break;
+            case kBearTab:
+                [self performSegueWithIdentifier:@"PhotoMapSegue3" sender:selectedPhoto];
+                break;
+            default:
+                break;
+        }
+    }
+    else if (buttonTag == kDDPhotoCollectionViewCellRearButton0)
+    {
+        switch (self.tabBarController.selectedIndex)
+        {
+            case kLionTab:
+                [self performSegueWithIdentifier:@"PhotogWorksSegue1" sender:selectedPhoto];
+                break;
+            case kTigerTab:
+                [self performSegueWithIdentifier:@"PhotogWorksSegue2" sender:selectedPhoto];
+                break;
+            case kBearTab:
+                [self performSegueWithIdentifier:@"PhotogWorksSegue3" sender:selectedPhoto];
+                break;
+            default:
+                break;
+        }
     }
 }
 
@@ -108,7 +125,7 @@
 {
     DDPhotoCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"PhotoCell" forIndexPath:indexPath];
     DDPhoto *curPhoto = [self.photoSetArray objectAtIndex:indexPath.row];
-    NSString *photoInfoString = [NSString stringWithFormat:@"%@\n\nFrom:\n%@\n\nTaken on:\n%@",
+    NSString *photoInfoString = [NSString stringWithFormat:@"\n%@\n\nFrom:\n%@\n\nTaken on:\n%@",
                                  curPhoto.photoTitle,curPhoto.photogName,curPhoto.photoDate];
 //    cell.textView.text = ([curPhoto.photoDescription length] > 0) ? curPhoto.photoDescription : @"No Description Found";
     cell.textView.text = photoInfoString;
@@ -119,16 +136,6 @@
 
     return cell;
 }
-
-
-//- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    DDPhotoCollectionViewCell *selectedCell =   (DDPhotoCollectionViewCell *)
-//                                                [self.collectionView cellForItemAtIndexPath:indexPath];
-//    [self.collectionView deselectItemAtIndexPath:indexPath animated:NO];
-//
-//    [selectedCell flip];
-//}
 
 
 #pragma mark - UICollectionViewDelegateFlowLayout Delegate Methods
@@ -147,6 +154,8 @@
     }
     return insets;
 }
+
+#pragma mark - Device Orientation Response Methods
 
 -(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
@@ -168,24 +177,57 @@
 
 #pragma mark - Helper Methods
 
+
+
 - (void)getPhotoSetUsingTabWithRefresh:(BOOL)shouldRefresh
 {
-    switch (self.tabBarController.selectedIndex)
+    if (self.photogID == nil)
     {
-        case kLionTab:
-            self.photoSetArray = [self.flickrManager getPhotoSetWithSearchKeyword:@"Lion" withRefresh:shouldRefresh];
-            break;
-        case kTigerTab:
-            self.photoSetArray = [self.flickrManager getPhotoSetWithSearchKeyword:@"Tiger" withRefresh:shouldRefresh];
-            break;
-        case kBearTab:
-            self.photoSetArray = [self.flickrManager getPhotoSetWithSearchKeyword:@"Bear" withRefresh:shouldRefresh];
-            break;
-        default:
-            //            self.photoSetArray = [self.flickrManager getPhotoSetWithSearchKeyword:@"Lion" withRefresh:YES];
-            break;
+        switch (self.tabBarController.selectedIndex)
+        {
+            case kLionTab:
+                self.photoSetArray = [self.flickrManager getPhotoSetWithSearchKeyword:@"Lion" withRefresh:shouldRefresh];
+                break;
+            case kTigerTab:
+                self.photoSetArray = [self.flickrManager getPhotoSetWithSearchKeyword:@"Tiger" withRefresh:shouldRefresh];
+                break;
+            case kBearTab:
+                self.photoSetArray = [self.flickrManager getPhotoSetWithSearchKeyword:@"Bear" withRefresh:shouldRefresh];
+                break;
+            default:
+                break;
+        }
+    }
+    else
+    {
+        self.photoSetArray = [self.flickrManager getPhotoSetWithPhotogID:self.photogID withRefresh:shouldRefresh];
     }
 }
+
+
+
+- (void)setUpMainViewColors
+{
+    UINavigationBar *navBar = self.navigationController.navigationBar;
+    navBar.barStyle = UIBarStyleBlackOpaque;
+    navBar.tintColor = [UIColor whiteColor];
+    navBar.barTintColor = [UIColor colorWithRed:kColorDarkBlueRed
+                                          green:kColorDarkBlueGreen
+                                           blue:kColorDarkBlueBlue
+                                          alpha:kDefaultNavBarColorAlpha];
+
+    UIApplication *application = [UIApplication sharedApplication];
+    UIWindow *window = [application.windows objectAtIndex:0];
+    UITabBarController *tabBarController = (UITabBarController *) window.rootViewController;
+
+    [tabBarController.tabBarItem setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName,nil] forState:UIControlStateNormal];
+
+    self.collectionView.backgroundColor = [UIColor colorWithRed:kColorBaseBlueRed
+                                                          green:kColorBaseBlueGreen
+                                                           blue:kColorBaseBlueBlue
+                                                          alpha:kDefaultNavBarColorAlpha];
+}
+
 
 
 #pragma mark - UIStoryboard Navigation
@@ -203,7 +245,10 @@
              [segue.identifier isEqualToString:@"PhotogWorksSegue2"] ||
              [segue.identifier isEqualToString:@"PhotogWorksSegue3"])
     {
-
+        DDPhoto *selectedPhoto = (DDPhoto *) sender;
+        DDPhotosDisplayViewController *photogWorksDisplayVC = segue.destinationViewController;
+        photogWorksDisplayVC.photogID = selectedPhoto.photogID;
+        photogWorksDisplayVC.photogName = selectedPhoto.photogName;
     }
 
 }

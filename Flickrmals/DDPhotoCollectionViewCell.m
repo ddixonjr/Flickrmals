@@ -21,6 +21,7 @@
 @property (strong, nonatomic) UILongPressGestureRecognizer *longPressGestureRecognizer;
 @property (strong, nonatomic) UITapGestureRecognizer *tapGestureRecognizer;
 @property (strong, nonatomic) UIButton *insetButton1;
+@property (strong, nonatomic) UIButton *rearViewButton;
 
 @end
 
@@ -50,12 +51,23 @@
         [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:self cache:YES];
         self.imageView.hidden = YES;
         self.textView.hidden = NO;
+        self.rearViewButton.hidden = NO;
+        if (self.isInsetShowing)
+        {
+            [self toggleInsetView:nil];
+        }
     }
     else
     {
         [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:self cache:YES];
         self.imageView.hidden = NO;
         self.textView.hidden = YES;
+        self.rearViewButton.hidden = YES;
+
+        if (self.isInsetShowing)
+        {
+            [self toggleInsetView:nil];
+        }
     }
 
     [UIView commitAnimations];
@@ -105,7 +117,16 @@
     self.textView.userInteractionEnabled = NO;
     self.textView.hidden = YES;
 
+    self.rearViewButton = [UIButton buttonWithType:UIButtonTypeInfoDark];
+    self.rearViewButton.frame = CGRectMake(126.0, 2.0, 22.0, 22.0);
+    self.rearViewButton.tag = kDDPhotoCollectionViewCellRearButton0;
+    [self.rearViewButton addTarget:self action:@selector(rearButtonPressed:) forControlEvents:UIControlEventTouchDown];
+    [self addSubview:self.rearViewButton];
+    self.rearViewButton.hidden = YES;
+
+    self.isInsetShowing = NO;
     self.isFlippedOnBack = NO;
+
     [self setUpInsetView];
 }
 
@@ -119,9 +140,9 @@
 
     self.insetButton1 = [UIButton buttonWithType:UIButtonTypeInfoLight];
     self.insetButton1.frame = CGRectMake(121.0, 8.0, 22.0, 22.0);
-    [self.insetView addSubview:self.insetButton1];
     self.insetButton1.tag = 0;
     [self.insetButton1 addTarget:self action:@selector(insetButtonPressed:) forControlEvents:UIControlEventTouchDown];
+    [self.insetView addSubview:self.insetButton1];
 
     self.titleLabel = [[UILabel alloc] init];
     self.titleLabel.frame = CGRectMake(6.0, 3.0, 107.0, 34.0);
@@ -130,17 +151,21 @@
     self.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:11.0];
     [self.insetView addSubview:self.titleLabel];
 
-
     self.insetView.hidden = YES;
     self.insetView.backgroundColor = [UIColor blackColor];
     self.insetView.alpha = kInsetFadedAlpha;
     self.isInsetShowing = NO;
-
 }
 
 - (void)insetButtonPressed:(UIButton *)insetButtonPressed
 {
     [self.delegate ddCollectionViewCell:self didSelectInsetAccessoryButtonWithTag:insetButtonPressed.tag];
+}
+
+
+- (void)rearButtonPressed:(UIButton *)rearButtonPressed
+{
+    [self.delegate ddCollectionViewCell:self didSelectInsetAccessoryButtonWithTag:rearButtonPressed.tag];
 }
 
 

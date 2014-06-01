@@ -13,5 +13,7 @@
 @interface DDPhotosDisplayViewController : UICollectionViewController
 
 @property (strong, nonatomic) DDFlickrManager *flickrManager;
+@property (strong, nonatomic) NSString *photogID;
+@property (strong, nonatomic) NSString *photogName;
 
 @end
