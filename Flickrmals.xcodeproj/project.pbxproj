@@ -24,7 +24,7 @@
 		95A300EC193A7E0A002C5414 /* DDPhotoMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95A300EB193A7E0A002C5414 /* DDPhotoMapViewController.m */; };
 		95A300EF193A7E52002C5414 /* DDFlickrManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 95A300EE193A7E52002C5414 /* DDFlickrManager.m */; };
 		95A300F2193A7E64002C5414 /* DDPhoto.m in Sources */ = {isa = PBXBuildFile; fileRef = 95A300F1193A7E64002C5414 /* DDPhoto.m */; };
-		95A300F5193A7FD0002C5414 /* DDPhotoCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 95A300F4193A7FD0002C5414 /* DDPhotoCollectionCell.m */; };
+		95A300F5193A7FD0002C5414 /* DDPhotoCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 95A300F4193A7FD0002C5414 /* DDPhotoCollectionViewCell.m */; };
 		95A300F7193A85F2002C5414 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95A300F6193A85F2002C5414 /* MapKit.framework */; };
 /* End PBXBuildFile section */
 
@@ -64,8 +64,8 @@
 		95A300EE193A7E52002C5414 /* DDFlickrManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDFlickrManager.m; sourceTree = "<group>"; };
 		95A300F0193A7E64002C5414 /* DDPhoto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDPhoto.h; sourceTree = "<group>"; };
 		95A300F1193A7E64002C5414 /* DDPhoto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDPhoto.m; sourceTree = "<group>"; };
-		95A300F3193A7FD0002C5414 /* DDPhotoCollectionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDPhotoCollectionCell.h; sourceTree = "<group>"; };
-		95A300F4193A7FD0002C5414 /* DDPhotoCollectionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDPhotoCollectionCell.m; sourceTree = "<group>"; };
+		95A300F3193A7FD0002C5414 /* DDPhotoCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDPhotoCollectionViewCell.h; sourceTree = "<group>"; };
+		95A300F4193A7FD0002C5414 /* DDPhotoCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDPhotoCollectionViewCell.m; sourceTree = "<group>"; };
 		95A300F6193A85F2002C5414 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -131,8 +131,8 @@
 				95A300C5193A7842002C5414 /* DDAppDelegate.h */,
 				95A300C6193A7842002C5414 /* DDAppDelegate.m */,
 				95A300E5193A79A4002C5414 /* FlickrmalsStoryboard.storyboard */,
-				95A300F3193A7FD0002C5414 /* DDPhotoCollectionCell.h */,
-				95A300F4193A7FD0002C5414 /* DDPhotoCollectionCell.m */,
+				95A300F3193A7FD0002C5414 /* DDPhotoCollectionViewCell.h */,
+				95A300F4193A7FD0002C5414 /* DDPhotoCollectionViewCell.m */,
 				95A300E7193A7C10002C5414 /* DDPhotosDisplayViewController.h */,
 				95A300E8193A7C10002C5414 /* DDPhotosDisplayViewController.m */,
 				95A300EA193A7E0A002C5414 /* DDPhotoMapViewController.h */,
@@ -278,7 +278,7 @@
 				95A300EF193A7E52002C5414 /* DDFlickrManager.m in Sources */,
 				95A300C7193A7842002C5414 /* DDAppDelegate.m in Sources */,
 				95A300E9193A7C10002C5414 /* DDPhotosDisplayViewController.m in Sources */,
-				95A300F5193A7FD0002C5414 /* DDPhotoCollectionCell.m in Sources */,
+				95A300F5193A7FD0002C5414 /* DDPhotoCollectionViewCell.m in Sources */,
 				95A300C3193A7842002C5414 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

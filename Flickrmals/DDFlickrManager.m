@@ -99,8 +99,11 @@
                 DDPhoto *newDDPhoto = [[DDPhoto alloc] initWithImageData:newPhotoData];
                 newDDPhoto.photoTitle = [photoDictionary objectForKey:@"title"];
                 newDDPhoto.photoID = [photoDictionary objectForKey:@"id"];
+                newDDPhoto.photoDate = [photoDictionary objectForKey:@"datetaken"];
                 newDDPhoto.photogName = [photoDictionary objectForKey:@"ownername"];
                 newDDPhoto.photogID = [photoDictionary objectForKey:@"owner"];
+                NSDictionary *descriptionDictionary = [photoDictionary objectForKey:@"description"];
+                newDDPhoto.photoDescription = [descriptionDictionary objectForKey:@"description"];
 
                 NSNumber *coordinatePoint = [photoDictionary objectForKey:@"latitude"];
                 newDDPhoto.photoLongitude = [coordinatePoint doubleValue];

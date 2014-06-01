@@ -8,17 +8,25 @@
 
 #import "DDPhotosDisplayViewController.h"
 #import "DDPhotoMapViewController.h"
-#import "DDPhotoCollectionCell.h"
+#import "DDPhotoCollectionViewCell.h"
 #import "DDPhoto.h"
 
 #define kLionTab 0
 #define kTigerTab 1
 #define kBearTab 2
+#define kColorDarkBlueRed       75.0/255.0
+#define kColorDarkBlueGreen     94.0/255.0
+#define kColorDarkBlueBlue      122.0/255.0
+#define kColorBaseBlueRed       131.0/255.0
+#define kColorBaseBlueGreen     144.0/255.0
+#define kColorBaseBlueBlue      164.0/255.0
+#define kColorPaleOrangeRed     252.0/255.0
+#define kColorPaleOrangeGreen   185.0/255.0
+#define kColorPaleOrangeBlue    112.0/255.0
 
-@interface DDPhotosDisplayViewController ()
+@interface DDPhotosDisplayViewController () <DDPhotoCollectionViewCellDelegate>
 
 @property (strong, nonatomic) NSArray *photoSetArray;
-@property (strong, nonatomic) DDPhoto *selectedPhoto;
 
 @end
 
@@ -28,33 +36,59 @@
 {
     [super viewDidLoad];
 
-}
+    self.collectionView.backgroundColor = [UIColor colorWithRed:kColorBaseBlueRed
+                                                                           green:kColorBaseBlueGreen
+                                                                            blue:kColorBaseBlueBlue
+                                                                           alpha:0.7];
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlackOpaque;
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:kColorDarkBlueRed
+                                                          green:kColorDarkBlueGreen
+                                                           blue:kColorDarkBlueBlue
+                                                          alpha:0.7];
 
-- (void)viewWillAppear:(BOOL)animated
-{
     if (self.flickrManager == nil)
     {
         self.flickrManager = [[DDFlickrManager alloc] init];
     }
 
-    switch (self.tabBarController.selectedIndex)
-    {
-        case kLionTab:
-            self.photoSetArray = [self.flickrManager getPhotoSetWithSearchKeyword:@"Lion" withRefresh:YES];
-            break;
-        case kTigerTab:
-            self.photoSetArray = [self.flickrManager getPhotoSetWithSearchKeyword:@"Tiger" withRefresh:YES];
-            break;
-        case kBearTab:
-            self.photoSetArray = [self.flickrManager getPhotoSetWithSearchKeyword:@"Bear" withRefresh:YES];
-            break;
-        default:
-//            self.photoSetArray = [self.flickrManager getPhotoSetWithSearchKeyword:@"Lion" withRefresh:YES];
-            break;
-    }
+    [self getPhotoSetUsingTabWithRefresh:YES];
+}
+
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self getPhotoSetUsingTabWithRefresh:NO];
+}
+
+
+-(void)ddCollectionViewCell:(DDPhotoCollectionViewCell *)photoCell didRecieveLongTapWithFlippedOnBackStatus:(BOOL)isFlippedOnBack
+{
+
+
 
 }
 
+-(void)ddCollectionViewCell:(DDPhotoCollectionViewCell *)photoCell didSelectInsetAccessoryButtonWithTag:(NSInteger)buttonTag
+{
+    DDPhoto *selectedPhoto = [self.photoSetArray objectAtIndex:photoCell.tag];
+    switch (self.tabBarController.selectedIndex)
+    {
+        case kLionTab:
+            [self performSegueWithIdentifier:@"PhotoMapSegue1" sender:selectedPhoto];
+            break;
+        case kTigerTab:
+            [self performSegueWithIdentifier:@"PhotoMapSegue2" sender:selectedPhoto];
+            break;
+        case kBearTab:
+            [self performSegueWithIdentifier:@"PhotoMapSegue3" sender:selectedPhoto];
+            break;
+        default:
+            break;
+    }
+}
+
+
+#pragma mark - UICollectionView Delegate Methods
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
@@ -69,54 +103,54 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    DDPhotoCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"PhotoCell" forIndexPath:indexPath];
+    DDPhotoCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"PhotoCell" forIndexPath:indexPath];
     DDPhoto *curPhoto = [self.photoSetArray objectAtIndex:indexPath.row];
-
+    NSString *photoInfoString = [NSString stringWithFormat:@"%@\n\nFrom:\n%@\n\nTaken on:\n%@",
+                                 curPhoto.photoTitle,curPhoto.photogName,curPhoto.photoDate];
+//    cell.textView.text = ([curPhoto.photoDescription length] > 0) ? curPhoto.photoDescription : @"No Description Found";
+    cell.textView.text = photoInfoString;
     cell.imageView.image = curPhoto.image;
-
+    cell.tag = indexPath.row;
+    cell.titleLabel.text = ([curPhoto.photoTitle length] > 0) ? curPhoto.photoTitle : @"No Description Found";
+    cell.delegate = self;
 
     return cell;
 }
 
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+
+//- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    DDPhotoCollectionViewCell *selectedCell =   (DDPhotoCollectionViewCell *)
+//                                                [self.collectionView cellForItemAtIndexPath:indexPath];
+//    [self.collectionView deselectItemAtIndexPath:indexPath animated:NO];
+//
+//    [selectedCell flip];
+//}
+
+
+#pragma mark - Helper Methods
+
+- (void)getPhotoSetUsingTabWithRefresh:(BOOL)shouldRefresh
 {
-    DDPhotoCollectionCell *selectedCell = (DDPhotoCollectionCell *) [self.collectionView cellForItemAtIndexPath:indexPath];
-    [self.collectionView deselectItemAtIndexPath:indexPath animated:NO];
-
-//    self.selectedPhoto = [self.photoSetArray objectAtIndex:indexPath.row];
-    [UIView beginAnimations:@"PhotoSelectAnimation" context:nil];
-    [UIView setAnimationDelegate:self];
-    [UIView setAnimationDidStopSelector:@selector(animationDidStop:finished:)];
-    selectedCell.imageView.image = nil;
-    [UIView setAnimationDuration:1.0];
-    [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:selectedCell cache:NO];
-    [UIView commitAnimations];
-
-
-//    A test of the photo mapping functionality -- it works!
-//    switch (self.tabBarController.selectedIndex)
-//    {
-//        case kLionTab:
-//            [self performSegueWithIdentifier:@"PhotoMapSegue1" sender:nil];
-//            break;
-//        case kTigerTab:
-//            [self performSegueWithIdentifier:@"PhotoMapSegue2" sender:nil];
-//            break;
-//        case kBearTab:
-//            [self performSegueWithIdentifier:@"PhotoMapSegue3" sender:nil];
-//            break;
-//        default:
-//            break;
-//    }
-
-
+    switch (self.tabBarController.selectedIndex)
+    {
+        case kLionTab:
+            self.photoSetArray = [self.flickrManager getPhotoSetWithSearchKeyword:@"Lion" withRefresh:shouldRefresh];
+            break;
+        case kTigerTab:
+            self.photoSetArray = [self.flickrManager getPhotoSetWithSearchKeyword:@"Tiger" withRefresh:shouldRefresh];
+            break;
+        case kBearTab:
+            self.photoSetArray = [self.flickrManager getPhotoSetWithSearchKeyword:@"Bear" withRefresh:shouldRefresh];
+            break;
+        default:
+            //            self.photoSetArray = [self.flickrManager getPhotoSetWithSearchKeyword:@"Lion" withRefresh:YES];
+            break;
+    }
 }
 
-- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
-{
 
-}
-
+#pragma mark - UIStoryboard Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -125,7 +159,7 @@
         [segue.identifier isEqualToString:@"PhotoMapSegue3"])
     {
         DDPhotoMapViewController *photoMapVC = segue.destinationViewController;
-        photoMapVC.photo = self.selectedPhoto;
+        photoMapVC.photo = (DDPhoto *) sender;
     }
     else if ([segue.identifier isEqualToString:@"PhotogWorksSegue1"] ||
              [segue.identifier isEqualToString:@"PhotogWorksSegue2"] ||
