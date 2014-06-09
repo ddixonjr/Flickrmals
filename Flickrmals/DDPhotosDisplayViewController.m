@@ -128,8 +128,19 @@
     NSString *photoInfoString = [NSString stringWithFormat:@"\n%@\n\nFrom:\n%@\n\nTaken on:\n%@",
                                  curPhoto.photoTitle,curPhoto.photogName,curPhoto.photoDate];
 //    cell.textView.text = ([curPhoto.photoDescription length] > 0) ? curPhoto.photoDescription : @"No Description Found";
+
+    dispatch_queue_t bkgndQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_async(bkgndQueue,^{
+        NSData *newPhotoData = [NSData dataWithContentsOfURL:[NSURL URLWithString:curPhoto.photoURL]];
+        if (newPhotoData) {
+            dispatch_async(dispatch_get_main_queue(),^{
+                cell.imageView.image = [UIImage imageWithData:newPhotoData];
+                [cell setNeedsLayout];
+            });
+        }
+    });
+
     cell.textView.text = photoInfoString;
-    cell.imageView.image = curPhoto.image;
     cell.tag = indexPath.row;
     cell.titleLabel.text = ([curPhoto.photoTitle length] > 0) ? curPhoto.photoTitle : @"No Description Found";
     cell.delegate = self;
@@ -142,7 +153,7 @@
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
-    NSLog(@"in insetForSectionAtIndex");
+//    NSLog(@"in insetForSectionAtIndex");
     UIEdgeInsets insets;
     if ([UIApplication sharedApplication].statusBarOrientation == UIInterfaceOrientationPortrait)
     {

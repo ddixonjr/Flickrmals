@@ -17,6 +17,7 @@
 @property (strong, nonatomic) NSString *photoDescription;
 @property (strong, nonatomic) NSString *photoTitle;
 @property (strong, nonatomic) NSString *photoDate;
+@property (strong, nonatomic) NSString *photoURL;
 @property (assign, nonatomic) double photoLatitude;
 @property (assign, nonatomic) double photoLongitude;
 

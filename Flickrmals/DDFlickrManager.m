@@ -32,7 +32,7 @@
 
 - (NSArray *)getPhotoSetWithSearchKeyword:(NSString *)searchKeyword withRefresh:(BOOL)refreshRequested
 {
-    NSLog(@"DDFlickrManager: in getPhotoSetWithSearchKeyword:withRefresh:");
+//    NSLog(@"DDFlickrManager: in getPhotoSetWithSearchKeyword:withRefresh:");
 
     NSArray *requestedPhotoSet = [self.photoSetsDictionary objectForKey:searchKeyword];
     if (refreshRequested || requestedPhotoSet == nil)
@@ -44,14 +44,14 @@
         requestedPhotoSet = [self.photoSetsDictionary objectForKey:searchKeyword];
     }
 
-    NSLog(@"photoSetsDictionary contains: %@", self.photoSetsDictionary);
+//    NSLog(@"photoSetsDictionary contains: %@", self.photoSetsDictionary);
     return requestedPhotoSet;
 }
 
 
 - (NSArray *)getPhotoSetWithPhotogID:(NSString *)flickrPhotogID withRefresh:(BOOL)refreshRequested
 {
-    NSLog(@"DDFlickrManager: in getPhotoSetWithPhotogID:withRefresh:");
+//    NSLog(@"DDFlickrManager: in getPhotoSetWithPhotogID:withRefresh:");
 
     NSArray *requestedPhotoSet = [self.photoSetsDictionary objectForKey:flickrPhotogID];
     if (refreshRequested || requestedPhotoSet == nil)
@@ -64,7 +64,7 @@
 
     requestedPhotoSet = [self.photoSetsDictionary objectForKey:flickrPhotogID];
 
-    NSLog(@"photoSetsDictionary contains: %@", self.photoSetsDictionary);
+//    NSLog(@"photoSetsDictionary contains: %@", self.photoSetsDictionary);
     return requestedPhotoSet;
 }
 
@@ -91,28 +91,23 @@
         NSString *curPhotogID = nil;
         for (NSDictionary *photoDictionary in rawPhotoSetArray)
         {
-            NSString *newPhotoURLString = [photoDictionary objectForKey:@"url_q"];
-            NSData *newPhotoData = [NSData dataWithContentsOfURL:[NSURL URLWithString:newPhotoURLString]];
+            DDPhoto *newDDPhoto = [[DDPhoto alloc] init];
+            newDDPhoto.photoTitle = [photoDictionary objectForKey:@"title"];
+            newDDPhoto.photoID = [photoDictionary objectForKey:@"id"];
+            newDDPhoto.photoDate = [photoDictionary objectForKey:@"datetaken"];
+            newDDPhoto.photogName = [photoDictionary objectForKey:@"ownername"];
+            newDDPhoto.photogID = [photoDictionary objectForKey:@"owner"];
+            newDDPhoto.photoURL = [photoDictionary objectForKey:@"url_q"];
+            NSDictionary *descriptionDictionary = [photoDictionary objectForKey:@"description"];
+            newDDPhoto.photoDescription = [descriptionDictionary objectForKey:@"description"];
 
-            if (newPhotoData != nil)
-            {
-                DDPhoto *newDDPhoto = [[DDPhoto alloc] initWithImageData:newPhotoData];
-                newDDPhoto.photoTitle = [photoDictionary objectForKey:@"title"];
-                newDDPhoto.photoID = [photoDictionary objectForKey:@"id"];
-                newDDPhoto.photoDate = [photoDictionary objectForKey:@"datetaken"];
-                newDDPhoto.photogName = [photoDictionary objectForKey:@"ownername"];
-                newDDPhoto.photogID = [photoDictionary objectForKey:@"owner"];
-                NSDictionary *descriptionDictionary = [photoDictionary objectForKey:@"description"];
-                newDDPhoto.photoDescription = [descriptionDictionary objectForKey:@"description"];
+            NSNumber *coordinatePoint = [photoDictionary objectForKey:@"latitude"];
+            newDDPhoto.photoLongitude = [coordinatePoint doubleValue];
+            coordinatePoint = [photoDictionary objectForKey:@"longitude"];
+            newDDPhoto.photoLongitude = [coordinatePoint doubleValue];
 
-                NSNumber *coordinatePoint = [photoDictionary objectForKey:@"latitude"];
-                newDDPhoto.photoLongitude = [coordinatePoint doubleValue];
-                coordinatePoint = [photoDictionary objectForKey:@"longitude"];
-                newDDPhoto.photoLongitude = [coordinatePoint doubleValue];
-
-                curPhotogID = newDDPhoto.photogID;
-                [newPhotoSet addObject:newDDPhoto];
-            }
+            curPhotogID = newDDPhoto.photogID;
+            [newPhotoSet addObject:newDDPhoto];
         }
 
         if (photoSetRequestType == DDFlickrPhotoSetRequestSearchKeywordType)
