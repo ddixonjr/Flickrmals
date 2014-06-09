@@ -73,19 +73,26 @@
     DDPhoto *selectedPhoto = [self.photoSetArray objectAtIndex:photoCell.tag];
     if (buttonTag == kDDPhotoCollectionViewCellInsetButton0)
     {
-        switch (self.tabBarController.selectedIndex)
+        if (self.photogID == nil)
         {
-            case kLionTab:
-                [self performSegueWithIdentifier:@"PhotoMapSegue1" sender:selectedPhoto];
-                break;
-            case kTigerTab:
-                [self performSegueWithIdentifier:@"PhotoMapSegue2" sender:selectedPhoto];
-                break;
-            case kBearTab:
-                [self performSegueWithIdentifier:@"PhotoMapSegue3" sender:selectedPhoto];
-                break;
-            default:
-                break;
+            switch (self.tabBarController.selectedIndex)
+            {
+                case kLionTab:
+                    [self performSegueWithIdentifier:@"PhotoMapSegue1" sender:selectedPhoto];
+                    break;
+                case kTigerTab:
+                    [self performSegueWithIdentifier:@"PhotoMapSegue2" sender:selectedPhoto];
+                    break;
+                case kBearTab:
+                    [self performSegueWithIdentifier:@"PhotoMapSegue3" sender:selectedPhoto];
+                    break;
+                default:
+                    break;
+            }
+        }
+        else
+        {
+            [self performSegueWithIdentifier:@"PhotoMapSegue4" sender:selectedPhoto];
         }
     }
     else if (buttonTag == kDDPhotoCollectionViewCellRearButton0)
@@ -247,7 +254,8 @@
 {
     if ([segue.identifier isEqualToString:@"PhotoMapSegue1"] ||
         [segue.identifier isEqualToString:@"PhotoMapSegue2"] ||
-        [segue.identifier isEqualToString:@"PhotoMapSegue3"])
+        [segue.identifier isEqualToString:@"PhotoMapSegue3"] ||
+        [segue.identifier isEqualToString:@"PhotoMapSegue4"])
     {
         DDPhotoMapViewController *photoMapVC = segue.destinationViewController;
         photoMapVC.photo = (DDPhoto *) sender;

@@ -36,10 +36,13 @@
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" id="4CL-hU-zTX"/>
+                    <connections>
+                        <segue destination="n7v-8X-XfS" kind="modal" identifier="PhotoMapSegue4" id="NZ9-0P-jZK"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H2l-lw-T2G" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1249" y="-179"/>
+            <point key="canvasLocation" x="1249" y="-58"/>
         </scene>
         <!--Photo Map View Controller-->
         <scene sceneID="QuC-zO-rAx">
@@ -53,13 +56,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="WDz-od-ngq">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="WDz-od-ngq">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zoj-p7-HYi">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zoj-p7-HYi">
                                 <rect key="frame" x="270" y="20" width="50" height="50"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="4n8-cT-I8r"/>
+                                    <constraint firstAttribute="width" constant="50" id="teS-LP-pNT"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                 <state key="normal" title="X">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
@@ -71,6 +78,14 @@
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="WDz-od-ngq" firstAttribute="top" secondItem="coL-7M-F1F" secondAttribute="top" id="69r-Pq-6wG"/>
+                            <constraint firstItem="Zoj-p7-HYi" firstAttribute="top" secondItem="QRP-mg-tZm" secondAttribute="bottom" id="MAD-wj-pFd"/>
+                            <constraint firstAttribute="trailing" secondItem="Zoj-p7-HYi" secondAttribute="trailing" id="NvS-UM-gAr"/>
+                            <constraint firstItem="FFu-GO-nSJ" firstAttribute="top" secondItem="WDz-od-ngq" secondAttribute="bottom" id="Wtq-8s-524"/>
+                            <constraint firstAttribute="trailing" secondItem="WDz-od-ngq" secondAttribute="trailing" id="dQC-xO-gt5"/>
+                            <constraint firstItem="WDz-od-ngq" firstAttribute="leading" secondItem="coL-7M-F1F" secondAttribute="leading" id="nwJ-Z6-KvC"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="O2r-rG-Tvg"/>
                     <connections>
@@ -283,6 +298,6 @@
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="Pzi-lc-e9t"/>
-        <segue reference="vmx-sg-dD7"/>
+        <segue reference="NZ9-0P-jZK"/>
     </inferredMetricsTieBreakers>
 </document>
